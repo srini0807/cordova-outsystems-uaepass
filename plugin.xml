@@ -120,7 +120,9 @@
                 </dict>
             </array>
         </config-file>
-            
+              <config-file target="project.pbxproj" parent="/* Begin XCBuildConfiguration section */">
+        <string>LD_RUNPATH_SEARCH_PATHS = $(inherited)</string>
+    </config-file>
         <asset src="lib/ios/UAEPassClient" target="UAEPassClient" />
         <resource-file src="signData.json" target="./signData.json" />        
         <podspec src="www/UAEPassClient/UAEPassClient.podspec" />        
