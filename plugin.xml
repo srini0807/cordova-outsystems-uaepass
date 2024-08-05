@@ -58,10 +58,12 @@
     </platform>
     <variable name="USESWIFTLANGUAGEVERSION" value="5" /> 
     <variable name="SWIFT_VERSION" value="5" />
+    <variable name="SWIFTVERSION" value="5" />
     <platform name="ios">
         <preference name="UseSwiftLanguageVersion" value="$USESWIFTLANGUAGEVERSION" />
         <preference name="SwiftVersion" value="$SWIFT_VERSION" />
         <preference name="SWIFT_VERSION" value="$SWIFT_VERSION" />
+        <preference name="SWIFTVERSION" value="$SWIFTVERSION" />
 
         <hook type="after_plugin_install" src="hooks/ios/ChangeSchema.js" />
         <hook type="before_plugin_install" src="hooks/ios/add_swift_support.js" />
