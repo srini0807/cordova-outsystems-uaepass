@@ -119,6 +119,8 @@
                     </array>
                 </dict>
             </array>
+        </config-file>
+
        <config-file target="project.pbxproj" parent="/* Begin XCBuildConfiguration section */">
             <config>
                 <buildSettings>
