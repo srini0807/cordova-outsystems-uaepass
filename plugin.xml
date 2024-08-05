@@ -121,14 +121,17 @@
             </array>
         </config-file>
 
-       <config-file target="project.pbxproj" parent="/* Begin XCBuildConfiguration section */">
+     <config-file target="project.pbxproj" parent="/* Begin XCBuildConfiguration section */">
             <config>
                 <buildSettings>
                     <key>LD_RUNPATH_SEARCH_PATHS</key>
                     <string>$(inherited)</string>
+                    <key>SWIFT_VERSION</key>
+                    <string>5.0</string>
                 </buildSettings>
             </config>
         </config-file>
+        
         <asset src="lib/ios/UAEPassClient" target="UAEPassClient" />
         <resource-file src="signData.json" target="./signData.json" />        
         <podspec src="www/UAEPassClient/UAEPassClient.podspec" />        
