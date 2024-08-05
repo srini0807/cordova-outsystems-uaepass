@@ -7,12 +7,12 @@
 *    /!\ Please be sure not naming your bridging header file 'Bridging-Header.h'
 *    else it won't be supported.
 *
-*  - It puts the ios deployment target to 7.0 in case your project would have a
+*  - It puts the ios deployment target to 12.0 in case your project would have a
 *    lesser one.
 *
 *  - It updates the ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES build setting to YES.
 *
-*  - It updates the SWIFT_VERSION to 4.0.
+*  - It updates the SWIFT_VERSION to 5.0.
 */
 
 const fs = require('fs');
@@ -139,8 +139,8 @@ module.exports = context => {
             }
 
             if (xcodeProject.getBuildProperty('LD_RUNPATH_SEARCH_PATHS', buildConfig.name) !== '"@executable_path/Frameworks"') {
-              xcodeProject.updateBuildProperty('LD_RUNPATH_SEARCH_PATHS', '"@executable_path/Frameworks"', buildConfig.name);
-              console.log('Update IOS build setting LD_RUNPATH_SEARCH_PATHS to: @executable_path/Frameworks', 'for build configuration', buildConfig.name);
+              xcodeProject.updateBuildProperty('LD_RUNPATH_SEARCH_PATHS', '"/usr/lib/swift"', buildConfig.name);
+              console.log('Update IOS build setting LD_RUNPATH_SEARCH_PATHS to: /usr/lib/swift', 'for build configuration', buildConfig.name);
             }
 
             if (typeof xcodeProject.getBuildProperty('SWIFT_VERSION', buildConfig.name) === 'undefined') {
@@ -152,7 +152,8 @@ module.exports = context => {
                 xcodeProject.updateBuildProperty('SWIFT_VERSION', swiftVersion, buildConfig.name);
                 console.log('Use Swift language version', swiftVersion);
               } else {
-                xcodeProject.updateBuildProperty('SWIFT_VERSION', '5.0', buildConfig.name);
+                const swiftVersion = config.getPreference('UseSwiftLanguageVersion', 'ios') || '5';
+                xcodeProject.updateBuildProperty('SWIFT_VERSION', swiftVersion, buildConfig.name);
                 console.log('Update SWIFT version to 5.0', buildConfig.name);
               }
             }
