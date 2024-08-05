@@ -89,15 +89,7 @@ module.exports = context => {
         xcodeProject.addHeaderFile('Bridging-Header.h');
       }
 
-      buildConfigs = xcodeProject.pbxXCBuildConfigurationSection();
-      for (var config in buildConfigs) {
-            var buildConfig = buildConfigs[config];
-            if (buildConfig.buildSettings !== undefined) {
-                buildConfig.buildSettings.SWIFT_VERSION = '5.0';
-                buildConfig.buildSettings.ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = 'YES';
-            }
-      }
-      fs.writeFileSync(projectPath, myProj.writeSync());
+     
       const bridgingHeaderProperty = '"$(PROJECT_DIR)/$(PROJECT_NAME)' + bridgingHeaderPath.split(projectPath)[1] + '"';
 
       for (configName in buildConfigs) {
