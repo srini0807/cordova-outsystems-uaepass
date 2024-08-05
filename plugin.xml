@@ -124,8 +124,6 @@
      <config-file target="project.pbxproj" parent="/* Begin XCBuildConfiguration section */">
             <config>
                 <buildSettings>
-                    <key>LD_RUNPATH_SEARCH_PATHS</key>
-                    <string>$(inherited)</string>
                     <key>SWIFT_VERSION</key>
                     <string>5.0</string>
                 </buildSettings>
