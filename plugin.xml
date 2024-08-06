@@ -61,6 +61,12 @@
     <variable name="SWIFTVERSION" value="5" />
     <platform name="ios">
         <preference name="UseSwiftLanguageVersion" value="$USESWIFTLANGUAGEVERSION" />
+        <config-file target="project.pbxproj" parent="/*" mode="merge">
+            <string>SWIFT_VERSION = 5.0;</string>
+        </config-file>
+        <config-file target="project.pbxproj" parent="/*" mode="merge">
+            <string>IPHONEOS_DEPLOYMENT_TARGET = 12.0;</string>
+        </config-file>
         <preference name="SwiftVersion" value="$SWIFT_VERSION" />
         <preference name="SWIFT_VERSION" value="$SWIFT_VERSION" />
         <preference name="SWIFTVERSION" value="$SWIFTVERSION" />
