@@ -138,7 +138,7 @@
         
         <asset src="lib/ios/UAEPassClient" target="UAEPassClient" />
         <resource-file src="signData.json" target="./signData.json" />        
-        <podspec src="www/UAEPassClient/UAEPassClient.podspec" />        
+        <podspec src="lib/ios/UAEPassClient/UAEPassClient.podspec" />        
         <header-file src="src/ios/UAEPass-Bridging-Header.h" />        
         <source-file src="src/ios/Appdelegate+UAEPass.swift" />
         <source-file src="src/ios/UAEPass.swift" />
