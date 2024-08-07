@@ -66,7 +66,6 @@
             <string>IPHONEOS_DEPLOYMENT_TARGET = 12.0;</string>
         </config-file>
          <preference name="SwiftVersion" value="$USESWIFTLANGUAGEVERSION" />
-        <preference name="deployment-target" value="12.0" />
         
         <hook type="after_plugin_install" src="hooks/ios/ChangeSchema.js" />
         <hook type="before_plugin_install" src="hooks/ios/add_swift_support.js" />
@@ -139,7 +138,7 @@
         <header-file src="src/ios/UAEPass-Bridging-Header.h" />        
         <source-file src="src/ios/Appdelegate+UAEPass.swift" />
         <source-file src="src/ios/UAEPass.swift" />
-                <hook type="after_prepare" src="hooks/ios/replaceResourcePath.js" />
+        <!--<hook type="after_prepare" src="hooks/ios/replaceResourcePath.js" />-->
 
     </platform>
 </plugin>
