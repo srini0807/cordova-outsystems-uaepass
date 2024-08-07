@@ -107,7 +107,7 @@
             </array>
         </config-file>
         
-        <dependency id="cordova-plugin-add-swift-support" spec="~1.7.2" />
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2" />
         <asset src="lib/ios/UAEPassClient" target="UAEPassClient" />
         <resource-file src="signData.json" target="./signData.json" />        
         <podspec src="lib/ios/UAEPassClient/UAEPassClient.podspec" />        
