@@ -1,19 +1,18 @@
-
 var path = require("path");
 var fs = require("fs");
 
 function copyFromSourceToDestPath(defer, sourcePath, destPath) {
     fs.createReadStream(sourcePath).pipe(fs.createWriteStream(destPath))
-    .on("close", function (err) {
-      defer.resolve();
+    .on("close", function () {
+        defer.resolve();
     })
     .on("error", function (err) {
-      console.log(err);
-      defer.reject();
+        console.log(err);
+        defer.reject();
     });
-  }
+}
 
-  module.exports = function(context) {
+module.exports = function(context) {
     var defer = require("q").defer();
 
     var pathSignData = path.join(
@@ -25,20 +24,27 @@ function copyFromSourceToDestPath(defer, sourcePath, destPath) {
         "main",
         "assets",
         "signData.json"
-    )
+    );
 
     var pathAssetSignData = path.join(
-      context.opts.plugin.dir,
-      "signData.json"
-  )
-  if(!fs.existsSync(pathSignData)){
+        context.opts.plugin.dir,
+        "src",
+        "signData.json"
+    );
 
-    defer.resolve();
+    // Check if source file exists before attempting to copy
+    if (!fs.existsSync(pathAssetSignData)) {
+        console.error("Source file signData.json not found at path:", pathAssetSignData);
+        defer.reject(new Error("signData.json file missing"));
+        return defer.promise;
+    }
+
+    // Proceed with the file copy if it doesn't already exist at the destination
+    if (!fs.existsSync(pathSignData)) {
+        copyFromSourceToDestPath(defer, pathAssetSignData, pathSignData);
+    } else {
+        defer.resolve();
+    }
+
     return defer.promise;
-  }
-
-  copyFromSourceToDestPath(defer,pathAssetSignData,pathSignData)
-  defer.resolve()
-
-  return defer.promise;
-}
+};
