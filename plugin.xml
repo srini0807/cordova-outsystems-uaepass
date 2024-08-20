@@ -112,7 +112,7 @@
         
         <dependency id="cordova-plugin-add-swift-support" version="2.0.2" />
         <asset src="lib/ios/UAEPassClient" target="UAEPassClient" />
-        <resource-file src="signData.json" target="./signData.json" />        
+        <resource-file src="src/signData.json" target="./signData.json" />        
         <podspec src="lib/ios/UAEPassClient/UAEPassClient.podspec" />        
         <header-file src="src/ios/UAEPass-Bridging-Header.h" />        
         <source-file src="src/ios/Appdelegate+UAEPass.swift" />
