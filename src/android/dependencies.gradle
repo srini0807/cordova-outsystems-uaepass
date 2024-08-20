@@ -23,20 +23,24 @@ android{
 }
 
 dependencies {
-
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'src/main/libs')
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support:support-v4:28.0.0'
+    // Migrate to AndroidX completely
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.google.android.material:material:1.4.0'
+
+    // Retrofit dependencies
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.loopj.android:android-async-http:1.4.9'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
-    //UAE PASS START -- Enable Kotlin Dependency Start
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    // Async HTTP library
+    implementation 'com.loopj.android:android-async-http:1.4.9'
+
+    // Kotlin standard library
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30"
-    //UAE PASS END -- Enable Kotlin Dependency End
 }
