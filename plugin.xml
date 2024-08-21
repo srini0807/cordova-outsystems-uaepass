@@ -34,7 +34,7 @@
 
 
 
-        <config-file target="AndroidManifest.xml" parent="/manifest">
+<!--         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.INTERNET" />
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
             <queries>
@@ -42,7 +42,7 @@
                 <package android:name="ae.uaepass.mainapp.qa" />
                 <package android:name="ae.uaepass.mainapp.stg" />
             </queries>
-        </config-file>
+        </config-file> -->
      
               
         <framework src="src/android/dependencies.gradle" custom="true" type="gradleReference" />
