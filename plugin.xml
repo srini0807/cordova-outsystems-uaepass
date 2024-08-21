@@ -22,7 +22,7 @@
             </feature>
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+<!--         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -30,7 +30,7 @@
                 <data android:host="${host_success}" android:scheme="${scheme}" />
                 <data android:host="${host_failure}" android:scheme="${scheme}" />
             </intent-filter>
-        </config-file>
+        </config-file> -->
 
 
 
