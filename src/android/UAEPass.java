@@ -97,15 +97,14 @@ public class UAEPass extends CordovaPlugin {
 
             }
         };
-        // Check Android version and register receiver with appropriate flag
+		// Check Android version and register receiver with appropriate flag
         IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             cordova.getActivity().registerReceiver(downloadcompletedBR, filter, Context.RECEIVER_NOT_EXPORTED);
         } else {
             cordova.getActivity().registerReceiver(downloadcompletedBR, filter);
         }
-        //cordova.getActivity().registerReceiver(downloadcompletedBR, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-    }
+        //cordova.getActivity().registerReceiver(downloadcompletedBR, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));    }
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
