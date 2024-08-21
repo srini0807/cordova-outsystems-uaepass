@@ -51,7 +51,6 @@
     	</config-file>
               
         <framework src="src/android/dependencies.gradle" custom="true" type="gradleReference" />
-        <!--<resource-file src="lib/android/libraryuaepass.aar" target="libs/libraryuaepass.aar"/>-->
    	<!-- Add the AAR library -->
    	<resource-file src="lib/android/libraryuaepass.aar" target="libs/libraryuaepass.aar" />
 	    
