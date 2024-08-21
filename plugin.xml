@@ -47,7 +47,10 @@
               
         <framework src="src/android/dependencies.gradle" custom="true" type="gradleReference" />
    	<!-- Add the AAR library -->
-   	<resource-file src="lib/android/libraryuaepass.aar" target="libs/libraryuaepass.aar" />
+   	<!--<resource-file src="lib/android/libraryuaepass.aar" target="libs/libraryuaepass.aar" />-->
+   	 <source-file src="src/android/libs/libraryuaepass.aar" target-dir="libs" />    
+    	<!-- Specify the dependencies required by the AAR library (if any) -->
+    	<framework src="src/android/libs/libraryuaepass.aar" custom="true" />
 	    
 	<resource-file src="src/signData.json" target="assets/signData.json" />
         <source-file src="src/android/UAEPass.java" target-dir="src/com/outsystems/uaepass" />
