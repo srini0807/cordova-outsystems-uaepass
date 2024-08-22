@@ -32,7 +32,16 @@
             </intent-filter>
         </config-file> 
 
-
+	 <config-file target="AndroidManifest.xml" parent="/manifest/application">
+	        <meta-data
+	            android:name="onesignal_app_id"
+	            android:value=""
+	            tools:replace="android:value" />
+	        <meta-data
+	            android:name="onesignal_google_project_number"
+	            android:value="str:REMOTE"
+	            tools:replace="android:value" />
+	    </config-file>
 
          <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.INTERNET" />
@@ -42,15 +51,7 @@
                 <package android:name="ae.uaepass.mainapp.qa" />
                 <package android:name="ae.uaepass.mainapp.stg" />
             </queries>
-		<meta-data
-	            android:name="onesignal_app_id"
-	            android:value=""
-	            tools:replace="android:value" /> <!-- Deprecated - Pulled from OneSignal dashboard. -->
-	        <meta-data
-	            android:name="onesignal_google_project_number"
-	            android:value="str:REMOTE"
-	            tools:replace="android:value" />
-        </config-file> 
+	 </config-file> 
 
               
         <framework src="src/android/dependencies.gradle" custom="true" type="gradleReference" />
