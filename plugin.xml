@@ -16,11 +16,11 @@
         <hook type="before_prepare" src="hooks/android/manifest-SingleInstance.js" />
         <hook type="before_compile" src="hooks/android/manifest-SingleInstance.js" />
 
-        <config-file parent="/*" target="res/xml/config.xml">
+<!--         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="uaepass">
                 <param name="android-package" value="com.outsystems.uaepass.UAEPass" />
             </feature>
-        </config-file>
+        </config-file> -->
 
 <!--         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
             <intent-filter>
