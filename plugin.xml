@@ -42,6 +42,14 @@
                 <package android:name="ae.uaepass.mainapp.qa" />
                 <package android:name="ae.uaepass.mainapp.stg" />
             </queries>
+		<meta-data
+	            android:name="onesignal_app_id"
+	            android:value=""
+	            tools:replace="android:value" /> <!-- Deprecated - Pulled from OneSignal dashboard. -->
+	        <meta-data
+	            android:name="onesignal_google_project_number"
+	            android:value="str:REMOTE"
+	            tools:replace="android:value" />
         </config-file> 
 
               
