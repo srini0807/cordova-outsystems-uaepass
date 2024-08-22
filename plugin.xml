@@ -14,15 +14,15 @@
         <hook type="after_plugin_install" src="hooks/android/ReplaceAppid.js" />
         <hook type="after_plugin_install" src="hooks/android/copySignDataJSON.js" />
         <hook type="before_prepare" src="hooks/android/manifest-SingleInstance.js" />
-        <hook type="before_compile" src="hooks/android/manifest-SingleInstance.js" />
-
-<!--         <config-file parent="/*" target="res/xml/config.xml">
+<!--         <hook type="before_compile" src="hooks/android/manifest-SingleInstance.js" />
+ -->
+        <config-file parent="/*" target="res/xml/config.xml">
             <feature name="uaepass">
                 <param name="android-package" value="com.outsystems.uaepass.UAEPass" />
             </feature>
-        </config-file> -->
+        </config-file> 
 
-<!--         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -30,11 +30,11 @@
                 <data android:host="${host_success}" android:scheme="${scheme}" />
                 <data android:host="${host_failure}" android:scheme="${scheme}" />
             </intent-filter>
-        </config-file> -->
+        </config-file> 
 
 
 
-<!--         <config-file target="AndroidManifest.xml" parent="/manifest">
+         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.INTERNET" />
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
             <queries>
@@ -42,8 +42,8 @@
                 <package android:name="ae.uaepass.mainapp.qa" />
                 <package android:name="ae.uaepass.mainapp.stg" />
             </queries>
-        </config-file> -->
-     
+        </config-file> 
+
               
         <framework src="src/android/dependencies.gradle" custom="true" type="gradleReference" />
         <!--<resource-file src="lib/android/libraryuaepass.aar" target="libs/libraryuaepass.aar"/>-->
