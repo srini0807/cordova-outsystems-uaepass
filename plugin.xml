@@ -10,8 +10,8 @@
     <platform name="android">
         <hook type="before_build" src="hooks/android/enableAndroidX.js" />
         <hook type="before_plugin_install" src="hooks/android/add_tools_namespace.js" />
-        <hook type="before_plugin_install" src="hooks/android/ChangeSchema.js" />
-        <hook type="after_plugin_install" src="hooks/android/ReplaceAppid.js" />
+<!--         <hook type="before_plugin_install" src="hooks/android/ChangeSchema.js" />
+        <hook type="after_plugin_install" src="hooks/android/ReplaceAppid.js" /> -->
         <hook type="after_plugin_install" src="hooks/android/copySignDataJSON.js" />
    <!--      <hook type="before_prepare" src="hooks/android/manifest-SingleInstance.js" />
         <hook type="before_compile" src="hooks/android/manifest-SingleInstance.js" />
