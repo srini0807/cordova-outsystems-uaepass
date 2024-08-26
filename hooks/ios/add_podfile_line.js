@@ -7,8 +7,10 @@ module.exports = function(ctx) {
 
     if (fs.existsSync(podfilePath)) {
         var podfileContent = fs.readFileSync(podfilePath, 'utf8');
+        console.log("podfileContent --- "+podfileContent);
         if (!podfileContent.includes(podLine)) {
             fs.appendFileSync(podfilePath, podLine + "\n");
+            console.log("new podfileContent --- "+podLine);
         }
     }
 };
