@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
 UAEPassPOD framework an abstract framewok to integrate any SP with UAEPASS application.
                        DESC
 
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'MIT' }
   s.author           = { 'Mohammed Gomaa' => 'mohammed.abdulbasier@digitaldubai.ae' }
   s.source           = { :git => ".git", :tag => s.version.to_s }
   s.ios.deployment_target = '13.0'
