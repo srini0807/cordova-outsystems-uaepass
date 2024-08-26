@@ -51,27 +51,26 @@ import UAEPassClient
     }
     
     @objc(getCode:) func getCode(command: CDVInvokedUrlCommand) {
-        self.callbackid = command.callbackId
-        UAEPASSNetworkRequests.shared.getUAEPASSConfig { 
-            self.webVC = UAEPassWebViewController.instantiate() as? UAEPassWebViewController
-            if self.webVC != nil {
-                self.webVC.urlString = UAEPassConfiguration.getServiceUrlForType(serviceType: .loginURL)
-                self.webVC.onUAEPassSuccessBlock = { code in
-                    if let code = code {
-                        self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_OK, messageAs: code), callbackId: self.callbackid)
-                        self.webVC.dismiss(animated: true)
-                    }
-                }
-                self.webVC.onUAEPassFailureBlock = { response in
-                    self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: response), callbackId: self.callbackid)
-                    self.webVC.dismiss(animated: true)
-                }
-                self.viewController.present(self.webVC, animated: true, completion: nil)
-                self.webVC.reloadwithURL(url: self.webVC.urlString)
+    self.callbackid = command.callbackId
+    UAEPASSNetworkRequests.shared.getUAEPASSConfig { 
+        self.webVC = UAEPassWebViewController.instantiate() as? UAEPassWebViewController
+        if self.webVC != nil {
+            self.webVC.urlString = UAEPassConfiguration.getServiceUrlForType(serviceType: .loginURL)
+            self.webVC.onUAEPassSuccessBlock = { code in
+                // Use the code directly since it's a non-optional String
+                self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_OK, messageAs: code), callbackId: self.callbackid)
+                self.webVC.dismiss(animated: true)
             }
+            self.webVC.onUAEPassFailureBlock = { response in
+                self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: response), callbackId: self.callbackid)
+                self.webVC.dismiss(animated: true)
+            }
+            self.viewController.present(self.webVC, animated: true, completion: nil)
+            self.webVC.reloadwithURL(url: self.webVC.urlString)
         }
     }
-        
+}
+
     @objc(getAccessToken:) func getAccessToken(command: CDVInvokedUrlCommand) {
         let code = command.argument(at: 0) as! String
         self.callbackid = command.callbackId
