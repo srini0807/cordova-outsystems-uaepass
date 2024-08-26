@@ -12,5 +12,6 @@ module.exports = function(ctx) {
             fs.appendFileSync(podfilePath, podLine + "\n");
             console.log("new podfileContent --- "+podLine);
         }
+        console.log("newpodfileContent --- "+podfileContent);
     }
 };
