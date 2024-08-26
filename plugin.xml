@@ -108,9 +108,8 @@
                 </dict>
             </array>
         </config-file>
-        <preference name="UseLegacySwiftLanguageVersion" value="true" />
 
-        <preference name="UseSwiftLanguageVersion" value="5" />
+        <preference name="UseSwiftLanguageVersion" default="5" />
 
 		<resource-file src="src/signData.json" target="./signData.json" />
         <asset src="lib/ios/UAEPassClient" target="UAEPassClient" />
