@@ -1,10 +1,3 @@
-//
-//  AppDelegate+UAEPass.swift
-//  UAEPass Sample app
-//
-//  Created by Luis Bouça on 05/05/2022.
-//
-
 import Foundation
 import UAEPassClient
 
@@ -20,8 +13,8 @@ extension AppDelegate {
             }
             return true
         } else if url.absoluteString.contains(HandleURLScheme.externalURLSchemeFail()) {
-            guard let webViewController = UserInterfaceInfo.topViewController() as? UAEPassWebViewController  else { return false }
-            webViewController.forceStop()
+            guard let webViewController = UserInterfaceInfo.topViewController() as? UAEPassWebViewController else { return false }
+            webViewController.stopLoading() // Replaced forceStop() with stopLoading()
             webViewController.dismiss(animated: true)
             return false
         }
@@ -38,8 +31,8 @@ extension AppDelegate {
             }
             return true
         } else if url.absoluteString.contains(HandleURLScheme.externalURLSchemeFail()) {
-            guard let webViewController = UserInterfaceInfo.topViewController() as? UAEPassWebViewController  else { return false }
-            webViewController.forceStop()
+            guard let webViewController = UserInterfaceInfo.topViewController() as? UAEPassWebViewController else { return false }
+            webViewController.stopLoading() // Replaced forceStop() with stopLoading()
             webViewController.dismiss(animated: true)
             return false
         }
