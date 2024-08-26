@@ -7,7 +7,7 @@
 *    /!\ Please be sure not naming your bridging header file 'Bridging-Header.h'
 *    else it won't be supported.
 *
-*  - It puts the ios deployment target to 12.0 in case your project would have a
+*  - It puts the ios deployment target to 7.0 in case your project would have a
 *    lesser one.
 *
 *  - It updates the ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES build setting to YES.
@@ -17,26 +17,16 @@
 
 const fs = require('fs');
 const path = require('path');
+const xcode = require('xcode');
 const childProcess = require('child_process');
-//const semver = require('semver');
+const semver = require('semver');
+const glob = require('glob');
 
 module.exports = context => {
   const projectRoot = context.opts.projectRoot;
-  
-  let xcode, glob;
-  if (cmpVersions(context.opts.cordova.version, '8.0.0') < 0) {
-    xcode = context.requireCordovaModule("xcode");
-    glob = context.requireCordovaModule("glob");
-  } else {
-    xcode = require('xcode');
-    glob = require('glob');
-  }
 
   // This script has to be executed depending on the command line arguments, not
   // on the hook execution cycle.
-  if ((context.hook === 'after_platform_add' && context.cmdLine.includes('platform add')) ||
-    (context.hook === 'after_prepare' && context.cmdLine.includes('prepare')) ||
-    (context.hook === 'after_plugin_add' && context.cmdLine.includes('plugin add'))) {
     getPlatformVersionsFromFileSystem(context, projectRoot).then(platformVersions => {
       const IOS_MIN_DEPLOYMENT_TARGET = '12.0';
       const platformPath = path.join(projectRoot, 'platforms', 'ios');
@@ -89,7 +79,8 @@ module.exports = context => {
         xcodeProject.addHeaderFile('Bridging-Header.h');
       }
 
-     
+      buildConfigs = xcodeProject.pbxXCBuildConfigurationSection();
+
       const bridgingHeaderProperty = '"$(PROJECT_DIR)/$(PROJECT_NAME)' + bridgingHeaderPath.split(projectPath)[1] + '"';
 
       for (configName in buildConfigs) {
@@ -137,22 +128,21 @@ module.exports = context => {
               console.log('Update IOS build setting ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES to: YES', 'for build configuration', buildConfig.name);
             }
 
-            //if (xcodeProject.getBuildProperty('LD_RUNPATH_SEARCH_PATHS', buildConfig.name) !== '"@executable_path/Frameworks"') {
-            //  xcodeProject.updateBuildProperty('LD_RUNPATH_SEARCH_PATHS', '"/usr/lib/swift"', buildConfig.name);
-             // console.log('Update IOS build setting LD_RUNPATH_SEARCH_PATHS to: /usr/lib/swift', 'for build configuration', buildConfig.name);
-            //}
+            if (xcodeProject.getBuildProperty('LD_RUNPATH_SEARCH_PATHS', buildConfig.name) !== '"@executable_path/Frameworks"') {
+              xcodeProject.updateBuildProperty('LD_RUNPATH_SEARCH_PATHS', '"@executable_path/Frameworks"', buildConfig.name);
+              console.log('Update IOS build setting LD_RUNPATH_SEARCH_PATHS to: @executable_path/Frameworks', 'for build configuration', buildConfig.name);
+            }
 
             if (typeof xcodeProject.getBuildProperty('SWIFT_VERSION', buildConfig.name) === 'undefined') {
               if (config.getPreference('UseLegacySwiftLanguageVersion', 'ios')) {
                 xcodeProject.updateBuildProperty('SWIFT_VERSION', '2.3', buildConfig.name);
                 console.log('Use legacy Swift language version', buildConfig.name);
               } else if (config.getPreference('UseSwiftLanguageVersion', 'ios')) {
-                const swiftVersion = config.getPreference('UseSwiftLanguageVersion', 'ios') || '5';
+                const swiftVersion = config.getPreference('UseSwiftLanguageVersion', 'ios');
                 xcodeProject.updateBuildProperty('SWIFT_VERSION', swiftVersion, buildConfig.name);
                 console.log('Use Swift language version', swiftVersion);
               } else {
-                const swiftVersion = config.getPreference('UseSwiftLanguageVersion', 'ios') || '5';
-                xcodeProject.updateBuildProperty('SWIFT_VERSION', swiftVersion, buildConfig.name);
+                xcodeProject.updateBuildProperty('SWIFT_VERSION', '5.0', buildConfig.name);
                 console.log('Update SWIFT version to 5.0', buildConfig.name);
               }
             }
@@ -169,13 +159,12 @@ module.exports = context => {
         fs.writeFileSync(pbxprojPath, xcodeProject.writeSync());
       });
     });
-  }
 };
 
 const getConfigParser = (context, configPath) => {
   let ConfigParser;
 
-  if (cmpVersions(context.opts.cordova.version, '5.4.0') < 0) {
+  if (semver.lt(context.opts.cordova.version, '5.4.0')) {
     ConfigParser = context.requireCordovaModule('cordova-lib/src/ConfigParser/ConfigParser');
   } else {
     ConfigParser = require('cordova-common').ConfigParser;
@@ -186,7 +175,7 @@ const getConfigParser = (context, configPath) => {
 
 const getBridgingHeaderPath = (projectPath, iosPlatformVersion) => {
   let bridgingHeaderPath;
-  if (cmpVersions(iosPlatformVersion, '4.0.0') < 0) {
+  if (semver.lt(iosPlatformVersion, '4.0.0')) {
     bridgingHeaderPath = path.posix.join(projectPath, 'Plugins', 'Bridging-Header.h');
   } else {
     bridgingHeaderPath = path.posix.join(projectPath, 'Bridging-Header.h');
@@ -219,19 +208,3 @@ const getPlatformVersionsFromFileSystem = (context, projectRoot) => {
 
   return Promise.all(platformVersions);
 };
-
-function cmpVersions (a, b) {
-    var i, diff;
-    var regExStrip0 = /(\.0+)+$/;
-    var segmentsA = a.replace(regExStrip0, '').split('.');
-    var segmentsB = b.replace(regExStrip0, '').split('.');
-    var l = Math.min(segmentsA.length, segmentsB.length);
-
-    for (i = 0; i < l; i++) {
-        diff = parseInt(segmentsA[i], 10) - parseInt(segmentsB[i], 10);
-        if (diff) {
-            return diff;
-        }
-    }
-    return segmentsA.length - segmentsB.length;
-}
