@@ -117,7 +117,7 @@
         <podspec name="UAEPassClient" spec=":path => 'www/UAEPassClient/UAEPassClient.podspec'" />
 	<podspec>
 	        <pods use-frameworks="true">
-	            <pod name="UAEPassClient" spec=":path => 'www/UAEPassClient/UAEPassClient.podspec'" />
+	            <pod name="UAEPassClient" path="www/UAEPassClient/" />
 	        </pods>
    	</podspec>
         <!-- <framework src="UAEPassClient" type="podspec" spec=":path => 'www/UAEPassClient/UAEPassClient.podspec'"/> -->
