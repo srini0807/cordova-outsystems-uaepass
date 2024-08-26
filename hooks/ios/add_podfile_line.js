@@ -14,7 +14,6 @@ module.exports = function(ctx) {
         if (targetBlock.test(podfileContent) && !podfileContent.includes(podLine)) {
             podfileContent = podfileContent.replace(targetBlock, `$&\n  ${podLine}`);
             fs.writeFileSync(podfilePath, podfileContent, 'utf8');
-                        console.log("new podfileContent --- "+podfileContent);
         }
                 console.log("newpodfileContent --- "+podfileContent);
     }
