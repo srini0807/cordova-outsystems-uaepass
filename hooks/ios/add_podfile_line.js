@@ -9,7 +9,7 @@ module.exports = function(ctx) {
         var podfileContent = fs.readFileSync(podfilePath, 'utf8');
         console.log("podfileContent --- "+podfileContent);
         if (!podfileContent.includes(podLine)) {
-            fs.appendFileSync(podfilePath, podLine + "\n");
+            fs.appendFileSync(podfilePath, "\n"+podLine + "\n");
             console.log("new podfileContent --- "+podLine);
         }
         console.log("newpodfileContent --- "+podfileContent);
