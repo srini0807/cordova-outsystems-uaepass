@@ -1,41 +1,51 @@
+
 import Foundation
 import UAEPassClient
 
-extension AppDelegate {
+extension AppDelegate{
     
     open override func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
-        print("<><><><> appDelegate URL : \(url.absoluteString)")
-        if url.absoluteString.contains(HandleURLScheme.externalURLSchemeSuccess()) {
-            if let topViewController = UserInterfaceInfo.topViewController() {
-                if let webViewController = topViewController as? UAEPassWebViewController {
-                    webViewController.forceReload()
+        if #available(iOS 13.0, *) {
+            print("<><><><> appDelegate URL : \(url.absoluteString)")
+            if url.absoluteString.contains(HandleURLScheme.externalURLSchemeSuccess()) {
+                if let topViewController = UserInterfaceInfo.topViewController() {
+                    if let webViewController = topViewController as? UAEPassWebViewController {
+                        webViewController.forceReload()
+                    }
                 }
+                return true
+            } else if url.absoluteString.contains(HandleURLScheme.externalURLSchemeFail()) {
+                guard let webViewController = UserInterfaceInfo.topViewController() as? UAEPassWebViewController  else { return false}
+                webViewController.foreceStop()
+                webViewController.dismiss(animated: true)
+                return false
             }
             return true
-        } else if url.absoluteString.contains(HandleURLScheme.externalURLSchemeFail()) {
-            guard let webViewController = UserInterfaceInfo.topViewController() as? UAEPassWebViewController else { return false }
-            webViewController.stopLoading() // Replaced forceStop() with stopLoading()
-            webViewController.dismiss(animated: true)
-            return false
+        } else {
+            return true;
         }
-        return true
     }
     
     open override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("<><><><> appDelegate URL : \(url.absoluteString)")
-        if url.absoluteString.contains(HandleURLScheme.externalURLSchemeSuccess()) {
-            if let topViewController = UserInterfaceInfo.topViewController() {
-                if let webViewController = topViewController as? UAEPassWebViewController {
-                    webViewController.forceReload()
+        if #available(iOS 13.0, *) {
+            print("<><><><> appDelegate URL : \(url.absoluteString)")
+            if url.absoluteString.contains(HandleURLScheme.externalURLSchemeSuccess()) {
+                if let topViewController = UserInterfaceInfo.topViewController() {
+                    if let webViewController = topViewController as? UAEPassWebViewController {
+                        webViewController.forceReload()
+                    }
                 }
+                return true
+            } else if url.absoluteString.contains(HandleURLScheme.externalURLSchemeFail()) {
+                guard let webViewController = UserInterfaceInfo.topViewController() as? UAEPassWebViewController  else { return false}
+                webViewController.foreceStop()
+                webViewController.dismiss(animated: true)
+                return false
             }
             return true
-        } else if url.absoluteString.contains(HandleURLScheme.externalURLSchemeFail()) {
-            guard let webViewController = UserInterfaceInfo.topViewController() as? UAEPassWebViewController else { return false }
-            webViewController.stopLoading() // Replaced forceStop() with stopLoading()
-            webViewController.dismiss(animated: true)
-            return false
+        } else {
+            return true;
         }
-        return true
     }
+    
 }
