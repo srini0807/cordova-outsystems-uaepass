@@ -112,7 +112,7 @@
         <preference name="UseSwiftLanguageVersion" default="5" />
 
         <asset src="lib/ios/UAEPassClient" target="UAEPassClient" />
-		<resource-file src="signData.json" target="./signData.json" />
+		<resource-file src="src/signData.json" target="./signData.json" />
 
         <framework src="UAEPassClient" type="podspec" spec=":path => 'www/UAEPassClient/UAEPassClient.podspec'"/>
         
