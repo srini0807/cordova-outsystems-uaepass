@@ -1,3 +1,4 @@
+
 module.exports = function(ctx) {
     var fs = require('fs');
     var path = require('path');
@@ -8,10 +9,13 @@ module.exports = function(ctx) {
     if (fs.existsSync(podfilePath)) {
         var podfileContent = fs.readFileSync(podfilePath, 'utf8');
         console.log("podfileContent --- "+podfileContent);
-        if (!podfileContent.includes(podLine)) {
-            fs.appendFileSync(podfilePath, "\n"+podLine + "\n");
-            console.log("new podfileContent --- "+podLine);
+        // Look for the target block to inject your pod dependency
+        var targetBlock = /target 'PassSDK' do/g;
+        if (targetBlock.test(podfileContent) && !podfileContent.includes(podLine)) {
+            podfileContent = podfileContent.replace(targetBlock, `$&\n  ${podLine}`);
+            fs.writeFileSync(podfilePath, podfileContent, 'utf8');
+                        console.log("new podfileContent --- "+podfileContent);
         }
-        console.log("newpodfileContent --- "+podfileContent);
+                console.log("newpodfileContent --- "+podfileContent);
     }
 };
