@@ -51,25 +51,50 @@ import UAEPassClient
     }
     
     @objc(getCode:) func getCode(command: CDVInvokedUrlCommand) {
-    self.callbackid = command.callbackId
-    UAEPASSNetworkRequests.shared.getUAEPASSConfig { 
-        self.webVC = UAEPassWebViewController.instantiate() as? UAEPassWebViewController
-        if self.webVC != nil {
-            self.webVC.urlString = UAEPassConfiguration.getServiceUrlForType(serviceType: .loginURL)
-            self.webVC.onUAEPassSuccessBlock = { code in
-                // Use the code directly since it's a non-optional String
-                self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_OK, messageAs: code), callbackId: self.callbackid)
-                self.webVC.dismiss(animated: true)
+        self.callbackid = command.callbackId
+        UAEPASSNetworkRequests.shared.getUAEPASSConfig { 
+            self.webVC = UAEPassWebViewController.instantiate() as? UAEPassWebViewController
+            if self.webVC != nil {
+                self.webVC.urlString = UAEPassConfiguration.getServiceUrlForType(serviceType: .loginURL)
+                self.webVC.onUAEPassSuccessBlock = { code in
+                    // Use the code directly since it's a non-optional String
+                    self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_OK, messageAs: code), callbackId: self.callbackid)
+                    self.webVC.dismiss(animated: true)
+                }
+                self.webVC.onUAEPassFailureBlock = { response in
+                    self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: response), callbackId: self.callbackid)
+                    self.webVC.dismiss(animated: true)
+                }
+                self.viewController.present(self.webVC, animated: true, completion: nil)
+                self.webVC.reloadwithURL(url: self.webVC.urlString)
             }
-            self.webVC.onUAEPassFailureBlock = { response in
-                self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: response), callbackId: self.callbackid)
-                self.webVC.dismiss(animated: true)
-            }
-            self.viewController.present(self.webVC, animated: true, completion: nil)
-            self.webVC.reloadwithURL(url: self.webVC.urlString)
         }
     }
-}
+
+    @objc(clearData:) func clearData(command: CDVInvokedUrlCommand) {
+        let code = command.argument(at: 0) as! String
+        self.callbackid = command.callbackId
+        var removalCompleted = true 
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)    
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) 
+        { records in records.forEach 
+            { record in WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record]) 
+                {
+                    if removalCompleted {
+                        removalCompleted = false
+                    }
+                }
+            }     
+            if removalCompleted {
+                UAEPASSRouter.shared.uaePassToken = nil
+                // Call success callback
+                self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Data cleared successfully"), callbackId: command.callbackid)
+            } else {
+                // Call failure callback
+                self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Failed to clear some data"), callbackId: command.callbackid)
+            }
+        }
+    }
 
     @objc(getAccessToken:) func getAccessToken(command: CDVInvokedUrlCommand) {
         let code = command.argument(at: 0) as! String
