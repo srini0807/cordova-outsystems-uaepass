@@ -71,29 +71,19 @@ import UAEPassClient
         }
     }
 
-    @objc(clearData:) func clearData(command: CDVInvokedUrlCommand) {
-        let code = command.argument(at: 0) as! String
+   @objc(clearData:) func clearData(command: CDVInvokedUrlCommand) {
         self.callbackid = command.callbackId
-        var removalCompleted = true 
-        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)    
-        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) 
-        { records in records.forEach 
-            { record in WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record]) 
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes())
+        { records in records.forEach
+            { record in WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record])
                 {
-                    if removalCompleted {
-                        removalCompleted = false
-                    }
                 }
-            }     
-            if removalCompleted {
-                UAEPASSRouter.shared.uaePassToken = nil
-                // Call success callback
-                self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Data cleared successfully"), callbackId: command.callbackid)
-            } else {
-                // Call failure callback
-                self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Failed to clear some data"), callbackId: command.callbackid)
             }
         }
+        UAEPASSRouter.shared.uaePassToken = nil
+        // Call success callback
+        self.commandDelegate.send(CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Data cleared successfully"), callbackId:  self.callbackid)
     }
 
     @objc(getAccessToken:) func getAccessToken(command: CDVInvokedUrlCommand) {
