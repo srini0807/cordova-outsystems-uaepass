@@ -10,7 +10,7 @@ module.exports = function(ctx) {
         var podfileContent = fs.readFileSync(podfilePath, 'utf8');
         console.log("podfileContent --- "+podfileContent);
         // Look for the target block to inject your pod dependency
-        var targetBlock = /project 'PassSDK.xcodeproj'/g;
+        var targetBlock = /project 'GEMS Connect.xcodeproj'/g;
         if (targetBlock.test(podfileContent) && !podfileContent.includes(podLine)) {
             podfileContent = podfileContent.replace(targetBlock, `$&\n  ${podLine}`);
             fs.writeFileSync(podfilePath, podfileContent, 'utf8');
