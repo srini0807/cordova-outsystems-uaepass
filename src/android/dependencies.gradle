@@ -13,7 +13,6 @@ android{
         buildConfigField "String", "URI_HOST_SUCCESS", "\"success\""
         buildConfigField "String", "URI_HOST_FAILURE", "\"failure\""
         manifestPlaceholders = [
-                appAuthRedirectScheme: "com.gems.ctdev://",
                 host_success: "success",
                 host_failure: "failure",
                 scheme      : "UAEPassSDK" // Change to your app name or any custom scheme. Donot use uaepasssample
