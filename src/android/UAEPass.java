@@ -61,6 +61,7 @@ public class UAEPass extends CordovaPlugin {
     private UAEPassRequestModels uaePassRequestModels;
 
     private CallbackContext callbackContext;
+    private CallbackContext currentCallbackContext;
 
     private BroadcastReceiver downloadcompletedBR;
 
