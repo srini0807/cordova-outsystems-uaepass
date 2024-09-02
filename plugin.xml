@@ -40,6 +40,18 @@
 
 	 <config-file target="AndroidManifest.xml" parent="/manifest/application">
 	        <meta-data
+	            android:name="host_success"
+	            android:value="success"
+	            tools:replace="android:value" />
+		 <meta-data
+	            android:name="host_failure"
+	            android:value="failure"
+	            tools:replace="android:value" />
+		  <meta-data
+	            android:name="scheme"
+	            android:value="UAEPassSDK"
+	            tools:replace="android:value" />
+		 <meta-data
 	            android:name="onesignal_app_id"
 	            android:value=""
 	            tools:replace="android:value" />
