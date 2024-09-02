@@ -182,6 +182,7 @@ public class UAEPass extends CordovaPlugin {
      * Login with UAE Pass and get the access Code.
      */
     private void getCode() {
+	this.currentCallbackContext = this.callbackContext; // Store the current callback context
         cordova.getActivity().runOnUiThread(() -> {
             UAEPassAccessTokenRequestModel requestModel = uaePassRequestModels.getAuthenticationRequestModel(cordova.getActivity());
             UAEPassController.INSTANCE.getAccessCode(cordova.getActivity(), requestModel, (code, error) -> {
@@ -189,9 +190,9 @@ public class UAEPass extends CordovaPlugin {
             Log.d("getCode", "Error: " + (error != null ? error : "null"));
                 if (error != null) {
 		    Log.d("getCode", "setting Error callback value: " + error);
-                    this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,error));
+                    currentCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,error));
                 } else {
-                    this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,code));
+                   currentCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,code));
                 }
             });
         });
