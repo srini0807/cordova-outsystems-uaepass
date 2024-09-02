@@ -8,6 +8,10 @@
     </js-module>
 
     <platform name="android">
+	<preference name="host_success" default="default_success_host" />
+    	<preference name="host_failure" default="default_failure_host" />
+    	<preference name="scheme" default="default_scheme" />
+	    
         <hook type="before_build" src="hooks/android/enableAndroidX.js" />
         <hook type="before_plugin_install" src="hooks/android/add_tools_namespace.js" />
         <hook type="before_plugin_install" src="hooks/android/ChangeSchema.js" />
