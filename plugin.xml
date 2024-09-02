@@ -33,6 +33,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:host="${host_success}" android:scheme="${scheme}" />
                 <data android:host="${host_failure}" android:scheme="${scheme}" />
+		<data android:scheme="com.gems.ctdev://" />
 		<!--<data android:host="host_success" android:scheme="scheme" />
                 <data android:host="host_failure" android:scheme="scheme" />-->
             </intent-filter>
@@ -40,18 +41,6 @@
 
 	 <config-file target="AndroidManifest.xml" parent="/manifest/application">
 	        <meta-data
-	            android:name="host_success"
-	            android:value="success"
-	            tools:replace="android:value" />
-		 <meta-data
-	            android:name="host_failure"
-	            android:value="failure"
-	            tools:replace="android:value" />
-		  <meta-data
-	            android:name="scheme"
-	            android:value="UAEPassSDK"
-	            tools:replace="android:value" />
-		 <meta-data
 	            android:name="onesignal_app_id"
 	            android:value=""
 	            tools:replace="android:value" />
