@@ -188,6 +188,7 @@ public class UAEPass extends CordovaPlugin {
             Log.d("getCode", "code: " + (code != null ? code : "null"));
             Log.d("getCode", "Error: " + (error != null ? error : "null"));
                 if (error != null) {
+		    Log.d("getCode", "setting Error callback value: " + error);
                     this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,error));
                 } else {
                     this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,code));
