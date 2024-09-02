@@ -184,6 +184,8 @@ public class UAEPass extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(() -> {
             UAEPassAccessTokenRequestModel requestModel = uaePassRequestModels.getAuthenticationRequestModel(cordova.getActivity());
             UAEPassController.INSTANCE.getAccessCode(cordova.getActivity(), requestModel, (code, error) -> {
+            Log.d("getCode", "code: " + (code != null ? code : "null"));
+            Log.d("getCode", "Error: " + (error != null ? error : "null"));
                 if (error != null) {
                     this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,error));
                 } else {
@@ -199,10 +201,7 @@ public class UAEPass extends CordovaPlugin {
     private void getAccessToken() {
         cordova.getActivity().runOnUiThread(() -> {
             UAEPassAccessTokenRequestModel requestModel = uaePassRequestModels.getAuthenticationRequestModel(cordova.getActivity());
-            UAEPassController.INSTANCE.getAccessToken(cordova.getActivity(), requestModel, (accessToken, state, error) -> {
-	    Log.d("getAccessToken", "State: " + (state != null ? state : "null"));
-            Log.d("getAccessToken", "AccessToken: " + (accessToken != null ? accessToken : "null"));
-            Log.d("getAccessToken", "Error: " + (error != null ? error : "null"));
+            UAEPassController.INSTANCE.getAccessToken(cordova.getActivity(), requestModel, (accessToken, state, error) -> {	   
                 if (error != null) {
                     this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,error));
                 } else {
