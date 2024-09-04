@@ -338,10 +338,28 @@ public class UAEPass extends CordovaPlugin {
      * Clear Webview data to open UAE Pass app again.
      */
     private void clearData() {
-        CookieManager.getInstance().removeAllCookies(value -> {
-
-        });
-        CookieManager.getInstance().flush();
+        //CookieManager.getInstance().removeAllCookies(value -> {
+        //});
+        //CookieManager.getInstance().flush();
+	    // Proceed with clearing specific website data related to "uaepass.ae"
+	    String uaepassDomain = "uaepass.ae";
+	    CookieManager cookieManager = CookieManager.getInstance();
+	    String cookies = cookieManager.getCookie(uaepassDomain);
+	
+	    if (cookies != null) {
+	        // Split the cookies string to handle each cookie individually
+	        String[] cookieArray = cookies.split(";");
+	        for (String cookie : cookieArray) {
+	            String[] cookieParts = cookie.split("=");
+	            if (cookieParts.length > 0) {
+	                String cookieName = cookieParts[0].trim();
+	                cookieManager.setCookie(uaepassDomain, cookieName + "=; Expires=Thu, 01 Jan 1970 00:00:00 GMT");
+	            }
+	        }
+	    }
+	
+	    // Flush to ensure the cookies are removed from storage immediately
+	    cookieManager.flush();
     }
 
 
