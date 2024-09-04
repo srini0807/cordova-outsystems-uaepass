@@ -342,25 +342,28 @@ public class UAEPass extends CordovaPlugin {
         //});
         //CookieManager.getInstance().flush();
 	String cookieslist = CookieManager.getInstance().getCookie("https://stg-ids.uaepass.ae");
-	Log.d("CookieManager", "Cookies for https://stg-ids.uaepass.ae: " + cookieslist);
-	String siteName = "uaepass.ae";
-    	CookieManager cookieManager = CookieManager.getInstance();
-    	String cookies = cookieManager.getCookie(siteName);
-    	Log.d("getcookies", "cookies: " + (cookies != null ? cookies : "null"));
-    	if (cookies != null) {
-        // Split the cookies string to handle each cookie individually
-        	String[] temp = cookies.split(";");
-        	for (String cookie : temp) {
-	            	String[] cookieParts = cookie.split("=");
-			if (cookieParts.length > 0) {
-	                	String cookieName = cookieParts[0].trim();                
-	                	// Clear each cookie by setting its expiration date to the past
-	                	cookieManager.setCookie(siteName, cookieName + "=; Expires=Thu, 01 Jan 1970 00:00:00 GMT");
-	            	}
-        	}
-    	}
-    	// Flush to ensure all cookies are removed from storage immediately
-    	cookieManager.flush();
+	Log.d("CookieManager", "Cookies for https://stg-ids.uaepass.ae: - " + cookieslist);
+	CookieManager cookieManager = CookieManager.getInstance();
+	String cookies = cookieManager.getCookie("https://stg-ids.uaepass.ae");
+	Log.d("getcookies", "cookies: " + cookies);
+	if (cookies != null) {
+		String[] cookieArray = cookies.split(";");
+	        for (String cookie : cookieArray) {
+	            String[] cookieParts = cookie.split("=");
+	            if (cookieParts.length > 0) {
+	                String cookieName = cookieParts[0].trim();
+	                
+	                // Clear the JSESSIONID cookie by setting its expiration date to the past
+	                if (cookieName.equals("JSESSIONID")) {
+	                    cookieManager.setCookie(url, cookieName + "=; Expires=Thu, 01 Jan 1970 00:00:00 GMT");
+	                    break; // No need to continue after removing the JSESSIONID
+	                }
+	            }
+	        }
+	    }
+	    
+	    // Flush to ensure the cookie is removed from storage immediately
+	    cookieManager.flush();
     }
 
 
