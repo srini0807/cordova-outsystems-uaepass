@@ -73,7 +73,7 @@ import UAEPassClient
 
    @objc(clearData:) func clearData(command: CDVInvokedUrlCommand) {
         self.callbackid = command.callbackId
-        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        //HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
         //WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes())
         //{ records in records.forEach
          //   { record in WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record])
