@@ -341,6 +341,8 @@ public class UAEPass extends CordovaPlugin {
         //CookieManager.getInstance().removeAllCookies(value -> {
         //});
         //CookieManager.getInstance().flush();
+	String cookies = CookieManager.getInstance().getCookie("https://stg-ids.uaepass.ae");
+	Log.d("CookieManager", "Cookies for https://stg-ids.uaepass.ae: " + cookies);
 	String siteName = "uaepass.ae";
     	CookieManager cookieManager = CookieManager.getInstance();
     	String cookies = cookieManager.getCookie(siteName);
