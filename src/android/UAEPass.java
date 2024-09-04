@@ -345,7 +345,7 @@ public class UAEPass extends CordovaPlugin {
 	    String uaepassDomain = "uaepass.ae";
 	    CookieManager cookieManager = CookieManager.getInstance();
 	    String cookies = cookieManager.getCookie(uaepassDomain);
-	
+	   Log.d("getcookies", "cookies: " + (cookies != null ? cookies : "null"));
 	    if (cookies != null) {
 	        // Split the cookies string to handle each cookie individually
 	        String[] cookieArray = cookies.split(";");
