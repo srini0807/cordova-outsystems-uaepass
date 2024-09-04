@@ -352,9 +352,9 @@ public class UAEPass extends CordovaPlugin {
 	            String[] cookieParts = cookie.split("=");
 	            if (cookieParts.length > 0) {
 	                String cookieName = cookieParts[0].trim();
-	                
-	                // Clear the JSESSIONID cookie by setting its expiration date to the past
-	                if (cookieName.equals("JSESSIONID")) {
+	                Log.d("getcookieName", "cookieName: " + cookieName);
+	                // Clear the commonAuthId cookie by setting its expiration date to the past
+	                if (cookieName.equals("commonAuthId")) {
 	                    cookieManager.setCookie("https://stg-ids.uaepass.ae", cookieName + "=; Expires=Thu, 01 Jan 1970 00:00:00 GMT");
 	                    break; // No need to continue after removing the JSESSIONID
 	                }
