@@ -83,7 +83,7 @@ import UAEPassClient
         //}      
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
             records.forEach { record in
-                if record.displayName.contains("uaepass") {
+                if record.displayName.contains("uaepass.ae") {
                     WKWebsiteDataStore.default().removeData(
                         ofTypes: record.dataTypes,
                         for: [record],
