@@ -341,27 +341,24 @@ public class UAEPass extends CordovaPlugin {
         //CookieManager.getInstance().removeAllCookies(value -> {
         //});
         //CookieManager.getInstance().flush();
-	    String siteName = "uaepass.ae";
-	    CookieManager cookieManager = CookieManager.getInstance();
-	    String cookies = cookieManager.getCookie(siteName);
-	    Log.d("getcookies", "cookies: " + (cookies != null ? cookies : "null"));
-	    if (cookies != null) {
-		String[] temp = cookies.split(";");
-		for (String ar1 : temp) {
-		    if (ar1.contains(cookieName)) {
-			String[] temp1 = ar1.split("=");
-			String cookieValue = temp1[1].trim();
-			
-			// Clear the specific cookie by setting its expiration date to the past
-			cookieManager.setCookie(siteName, cookieName + "=; Expires=Thu, 01 Jan 1970 00:00:00 GMT");
-			break;
-		    }
-		}
-	    }
-	    
-	    // Flush to ensure the cookie is removed from storage immediately
-	    cookieManager.flush();	    
-
+	String siteName = "uaepass.ae";
+    	CookieManager cookieManager = CookieManager.getInstance();
+    	String cookies = cookieManager.getCookie(siteName);
+    	Log.d("getcookies", "cookies: " + (cookies != null ? cookies : "null"));
+    	if (cookies != null) {
+        // Split the cookies string to handle each cookie individually
+        	String[] temp = cookies.split(";");
+        	for (String cookie : temp) {
+	            	String[] cookieParts = cookie.split("=");
+			if (cookieParts.length > 0) {
+	                	String cookieName = cookieParts[0].trim();                
+	                	// Clear each cookie by setting its expiration date to the past
+	                	cookieManager.setCookie(siteName, cookieName + "=; Expires=Thu, 01 Jan 1970 00:00:00 GMT");
+	            	}
+        	}
+    	}
+    	// Flush to ensure all cookies are removed from storage immediately
+    	cookieManager.flush();
     }
 
 
