@@ -74,11 +74,21 @@ import UAEPassClient
    @objc(clearData:) func clearData(command: CDVInvokedUrlCommand) {
         self.callbackid = command.callbackId
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes())
-        { records in records.forEach
-            { record in WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record])
-                {
-                }
+        //WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes())
+        //{ records in records.forEach
+         //   { record in WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record])
+        //        {
+        //        }
+        //    }
+        //}
+       WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes())
+        {records in records.forEach
+            {record in WKWebsiteDataStore.default().removeData(
+                    ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(),
+                    for: records.filter { $0.displayName.contains("uaepass") },
+                    completionHandler: {
+                    })
+                })
             }
         }
         UAEPASSRouter.shared.uaePassToken = nil
