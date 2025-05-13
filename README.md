@@ -62,7 +62,7 @@ Fetch the Menu items to display in portal
 | key | value |
 | --- | --- |
 | order-date | 2024-12-25 |
-| empno | 10031881 |
+| empno | {empo} |
 | Authorization | *****BEARER TOKEN***** |
 
 
@@ -139,7 +139,7 @@ Fetch the pickup location
 **Headers**
 | key | value |
 | --- | --- |
-| empno | 10031881 |
+| empno | {empo} |
 | Authorization | *****BEARER TOKEN***** |
 
 
@@ -170,7 +170,7 @@ Fetch the Order discount
 **Headers**
 | key | value |
 | --- | --- |
-| empno | 20031681 |
+| empno | {empo} |
 | order-date | 2024-12-01 |
 | Authorization | *****BEARER TOKEN***** |
 
@@ -196,7 +196,7 @@ Fetch the Dashboard banner images
 **Headers**
 | key | value |
 | --- | --- |
-| empno | 10031881 |
+| empno | {empo} |
 | Authorization | *****BEARER TOKEN***** |
 
 
@@ -259,7 +259,7 @@ View my past orders
 **Headers**
 | key | value |
 | --- | --- |
-| empno | 10024463 |
+| empno | {empo} |
 | fromDate | 2024-12-09 |
 | toDate | 2024-12-31 |
 | currentPage | 1 |
@@ -356,7 +356,7 @@ View past transaction history
 **Headers**
 | key | value |
 | --- | --- |
-| empno | 10024463 |
+| empno | {empo} |
 | currentPage | 1 |
 | Authorization | *****BEARER TOKEN***** |
 
