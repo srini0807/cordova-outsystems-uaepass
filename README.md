@@ -11,9 +11,9 @@
 | type | key | value |
 | --- | --- | --- |
 | text | grant_type | password |
-| text | username | SLICESDEV |
-| text | password | af699oe7-fi71-41uf-8dd2-990ak4f46l23 |
-| text | AppId | 9452 |
+| text | username | SLICESAPI |
+| text | password | aghsjsk-fjgks-ggkgol-gkgkt |
+| text | AppId | 000 |
 
 
 
@@ -23,7 +23,7 @@
 "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJUb2tlbkNsYWltIjoie1wiSXNWYWxpZENsaWVudFwiOlwiWUVTXCIsXCJJc0VuYWJsZUNsYWltVmFsaWRhdGlvblwiOlwiTk9cIixcIkFwcFVzZXJcIjpcIlwiLFwiVXNlclR5cGVcIjpcIlwiLFwic3R1ZGVudHNcIjpcIlwifSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJTTElDRVNERVYiLCJqdGkiOiI2Yjk3ODcyMy1mNjM4LTQzYmEtODViYS1iYmFiMjNjYWFiMGUiLCJleHAiOjE3NDcxNTY4MzAsImlzcyI6InBob2VuaXhhcGkiLCJhdWQiOiJHRU1TIn0.ybKPNpbIu0NO6CEWgJ-l4vPpUfOjhm9vdo8xLFrajwA",
 "token_type": "bearer",
 "expires_in": 43200,
-"userName": "SLICESDEV",
+"userName": "SlicesAPI",
 ".issued": "Tue, 13 May 2025 09:20:30 GMT",
 ".expires": "Tue, 13 May 2025 21:20:30 GMT"
 }
