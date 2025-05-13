@@ -20,7 +20,7 @@
 **Response**
 ```
 {
-"access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJUb2tlbkNsYWltIjoie1wiSXNWYWxpZENsaWVudFwiOlwiWUVTXCIsXCJJc0VuYWJsZUNsYWltVmFsaWRhdGlvblwiOlwiTk9cIixcIkFwcFVzZXJcIjpcIlwiLFwiVXNlclR5cGVcIjpcIlwiLFwic3R1ZGVudHNcIjpcIlwifSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJTTElDRVNERVYiLCJqdGkiOiI2Yjk3ODcyMy1mNjM4LTQzYmEtODViYS1iYmFiMjNjYWFiMGUiLCJleHAiOjE3NDcxNTY4MzAsImlzcyI6InBob2VuaXhhcGkiLCJhdWQiOiJHRU1TIn0.ybKPNpbIu0NO6CEWgJ-l4vPpUfOjhm9vdo8xLFrajwA",
+"access_token": "*****BEARER TOKEN*****",
 "token_type": "bearer",
 "expires_in": 43200,
 "userName": "SlicesAPI",
